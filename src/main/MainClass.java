@@ -31,12 +31,12 @@ public class MainClass {
 		
 		MemberDao dao = new MemberDao();
 		
-		String Manu[] = { "1.추가 ", "2.삭제 ", "3.검색 ", "4.수정 ", "5.저장,  "};
+		String Manu[] = { "1.추가 ", "2.삭제 ", "3.검색 ", "4.수정 ", "5.저장"};
 		boolean b =true;
 		while(b) {
 			System.out.println(Arrays.toString(Manu));
 			int workNumber;
-			System.out.print("원하는 메뉴를 선택하세요.");
+			System.out.print("원하는 메뉴를 선택하세요 : ");
 			workNumber = sc.nextInt();
 			
 			switch (workNumber) {

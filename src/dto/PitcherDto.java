@@ -5,17 +5,15 @@ public class PitcherDto extends HumanDto {
 	String lose;
 	String defence;
 	
-	public PitcherDto() {
-		
-	}
-	
+
 	public PitcherDto(String pAndb, String name, String age, String height, String win, String lose, String defence) {
 		super(pAndb, name, age, height);
 		this.win = win;
 		this.lose = lose;
 		this.defence = defence;
 	}
-
+	
+	
 	public String getWin() {
 		return win;
 	}
@@ -42,7 +40,7 @@ public class PitcherDto extends HumanDto {
 	
 	@Override
 	public String toString() {
-		return "[position=" + pAndb + ", name=" + name + ", age=" + age + ", height=" + height + ", win=" + win + ", lose=" + lose + ", defence=" + defence + "]";
+		return "[position=" + position + ", name=" + name + ", age=" + age + ", height=" + height + ", win=" + win + ", lose=" + lose + ", defence=" + defence + "]";
 	}
 
 	

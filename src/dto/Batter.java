@@ -5,10 +5,7 @@ public class Batter extends HumanDto {
 	String hit;
 	String hitAvg;
 	
-	public Batter() {
-		
-	}
-	
+
 	public Batter(String pAndb, String name, String age, String height, String batCount, String hit, String hitAvg) {
 		super(pAndb, name, age, height);
 		this.batCount = batCount;
@@ -42,7 +39,7 @@ public class Batter extends HumanDto {
 
 	@Override
 	public String toString() {
-		return "[position=" + pAndb + ", name=" + name + ", age=" + age + ", height=" + height +", batCount=" + batCount + ", hit=" + hit + ", hitAvg=" + hitAvg + "]";
+		return "[position=" + position + ", name=" + name + ", age=" + age + ", height=" + height +", batCount=" + batCount + ", hit=" + hit + ", hitAvg=" + hitAvg + "]";
 	}
 	
 	

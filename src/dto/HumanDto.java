@@ -1,7 +1,7 @@
 package dto;
 
 public class HumanDto {
-	String pAndb;
+	String position;
 	String name;
 	String age;
 	String height;
@@ -10,21 +10,21 @@ public class HumanDto {
 		this( "", "", "", "");
 	}
 	
-	public HumanDto(String pAndb, String name, String age, String height) {
+	public HumanDto(String position, String name, String age, String height) {
 
-		this.pAndb = pAndb;
+		this.position = position;
 		this.name = name;
 		this.age = age;
 		this.height = height;
 	}
 	
 	
-	public String getpAndb() {
-		return pAndb;
+	public String Position() {
+		return position;
 	}
 
-	public void setpAndb(String pAndb) {
-		this.pAndb = pAndb;
+	public void setpAndb(String position) {
+		this.position = position;
 	}
 
 	public String getName() {
@@ -53,7 +53,7 @@ public class HumanDto {
 
 	@Override
 	public String toString() {
-		return "HumanDto [number=" + pAndb + ", name=" + name + ", age=" + age + ", height=" + height + "]";
+		return "HumanDto [number=" + position + ", name=" + name + ", age=" + age + ", height=" + height + "]";
 	}
 	
 	
