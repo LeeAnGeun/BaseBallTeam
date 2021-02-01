@@ -19,7 +19,7 @@ public class HumanDto {
 	}
 	
 	
-	public String Position() {
+	public String getPosition() {
 		return position;
 	}
 
@@ -50,7 +50,10 @@ public class HumanDto {
 	public void setHeight(String height) {
 		this.height = height;
 	}
-
+	
+	public String alldata() {
+		return "";
+	}
 	@Override
 	public String toString() {
 		return "HumanDto [number=" + position + ", name=" + name + ", age=" + age + ", height=" + height + "]";

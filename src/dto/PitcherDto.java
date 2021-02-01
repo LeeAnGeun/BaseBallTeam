@@ -1,9 +1,9 @@
 package dto;
 
 public class PitcherDto extends HumanDto {
-	String win;
-	String lose;
-	String defence;
+	private String win;
+	private String lose;
+	private String defence;
 	
 
 	public PitcherDto(String pAndb, String name, String age, String height, String win, String lose, String defence) {
@@ -38,6 +38,11 @@ public class PitcherDto extends HumanDto {
 		this.defence = defence;
 	}
 	
+	@Override
+	public String alldata() {
+		return getPosition() + "-" + getName() + "-" + getAge() + "-" + getHeight()
+											+"-" + win + "-" + lose + "-" + defence;
+	}
 	@Override
 	public String toString() {
 		return "[position=" + position + ", name=" + name + ", age=" + age + ", height=" + height + ", win=" + win + ", lose=" + lose + ", defence=" + defence + "]";

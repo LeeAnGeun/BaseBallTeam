@@ -31,7 +31,7 @@ public class MainClass {
 		
 		MemberDao dao = new MemberDao();
 		
-		String Manu[] = { "1.추가 ", "2.삭제 ", "3.검색 ", "4.수정 ", "5.저장"};
+		String Manu[] = { "1.추가 ", "2.삭제 ", "3.검색 ", "4.수정 ", "5.저장", "6.종료"};
 		boolean b =true;
 		while(b) {
 			System.out.println(Arrays.toString(Manu));
@@ -53,8 +53,10 @@ public class MainClass {
 					dao.update();
 					break;
 				case 5:
-					dao.save();
-					System.out.println("정보를 성공적으로 저장하였습니다. 시스템을 종료합니다.");
+					dao.dataSave();
+					System.out.println("정보를 성공적으로 저장하였습니다");
+					break;
+				case 6:
 					b= false;
 					break;
 			}

@@ -1,9 +1,9 @@
 package dto;
 
 public class Batter extends HumanDto {
-	String batCount;
-	String hit;
-	String hitAvg;
+	private String batCount;
+	private String hit;
+	private String hitAvg;
 	
 
 	public Batter(String pAndb, String name, String age, String height, String batCount, String hit, String hitAvg) {
@@ -37,6 +37,12 @@ public class Batter extends HumanDto {
 		this.hitAvg = hitAvg;
 	}
 
+	@Override
+	public String alldata() {
+		return getPosition() + "-" + getName() + "-" + getAge() + "-" + getHeight()
+											+"-" + batCount + "-" + hit + "-" + hitAvg;
+	}
+	
 	@Override
 	public String toString() {
 		return "[position=" + position + ", name=" + name + ", age=" + age + ", height=" + height +", batCount=" + batCount + ", hit=" + hit + ", hitAvg=" + hitAvg + "]";

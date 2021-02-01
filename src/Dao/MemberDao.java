@@ -11,6 +11,8 @@ import java.util.Scanner;
 import dto.Batter;
 import dto.HumanDto;
 import dto.PitcherDto;
+import file.DataProc;
+
 import java.io.File;
 
 public class MemberDao {
@@ -18,18 +20,27 @@ public class MemberDao {
 	
 	private HumanDto humanArr[] = new HumanDto[30];
 	int hcount;
-	File newFile;
+	
+	private DataProc dp; 
 	
 	public MemberDao() {
-		hcount = 0;
 		
-		File newFile = new File("C:\\Baseball"); 
+		dp = new DataProc("BaseballTeam"); 
+		dp.creatFile();
 		
-		if(newFile.mkdirs()) {
-			System.out.println("폴더 생성 성공");
+		dataLoad();
+		
+		int lastIndexNumber = 0;
+		
+		for (int i = 0; i < humanArr.length; i++) {
+			if(humanArr[i] != null) {
+				lastIndexNumber = i;
+			}
 		}
-		else {
-			System.out.println("폴더 생성 실패"); // 같은 이름에 디렉토리가 있을시 실패한다.
+		if(lastIndexNumber > 0 ) {
+			hcount = lastIndexNumber + 1;
+		}else {
+			hcount = 0;
 		}
 	}
 	
@@ -62,11 +73,11 @@ public class MemberDao {
 		}
 		
 		else if(pbnumber == 2) {		
-			System.out.print("타자의 batCount : ");
+			System.out.print("타자의 타수 : ");
 			String batcount = sc.next();
-			System.out.print("타자의 hit : ");
+			System.out.print("타자의 안타수 : ");
 			String hit = sc.next();
-			System.out.print("타자의 hitAverage : ");
+			System.out.print("타자의 타율 : ");
 			String hitAvg = sc.next();
 			
 			humanArr[hcount] = new Batter("타자", name, age, height, batcount, hit, hitAvg);
@@ -147,19 +158,19 @@ public class MemberDao {
 		}
 		
 		if(humanArr[index] instanceof PitcherDto) {
-			System.out.print("해당 투수의 승리를 새로 입력하세요 : ");
+			System.out.print("해당 투수의 '승리'를 새로 입력하세요 : ");
 			((PitcherDto)humanArr[index]).setWin(sc.next());
-			System.out.print("해당 투수의 패배를 새로 입력하세요 : ");
+			System.out.print("해당 투수의 '패배'를 새로 입력하세요 : ");
 			((PitcherDto)humanArr[index]).setLose(sc.next());
-			System.out.print("해당 투수의 방어율을 새로 입력하세요 : ");
+			System.out.print("해당 투수의 '방어율'을 새로 입력하세요 : ");
 			((PitcherDto)humanArr[index]).setDefence(sc.next());
 		}
 		else {
-			System.out.print("해당 타자의 BatCount를 새로 입력하세요 : ");
+			System.out.print("해당 타자의 '타수'를 새로 입력하세요 : ");
 			((Batter)humanArr[index]).setBatCount(sc.next());
-			System.out.print("해당 타자의 Hit를 새로 입력하세요 : ");
+			System.out.print("해당 타자의 '안타수'를 새로 입력하세요 : ");
 			((Batter)humanArr[index]).setHit(sc.next());
-			System.out.print("해당 타자의 타율을 새로 입력하세요 : ");
+			System.out.print("해당 타자의 '타율'을 새로 입력하세요 : ");
 			((Batter)humanArr[index]).setHitAvg(sc.next());
 		}
 		
@@ -167,29 +178,53 @@ public class MemberDao {
 	}
 	
 	// 저장하기
-	public void save() {
-			File newFile = new File("C:\\Baseball\\MyTeam.txt"); // 파일 포인터
-			
-			try { 
-				newFile.createNewFile(); // 파일 생성
-			} catch (IOException e1) {
-				e1.printStackTrace();
+	public void dataSave() {
+		int len = 0;
+	
+		for (int i = 0; i < humanArr.length; i++) {
+			if(humanArr[i] != null && !humanArr[i].getName().equals(null)) {
+				len++;
 			}
-			
-			
-			try {
-			PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(newFile)));
-			
-			for (int i = 0; i < humanArr.length; i++) {
-				if(humanArr[i] != null && !humanArr[i].getName().equals(null)) {
-					pw.println(humanArr[i]); // humanArr[] 배열에 입력된 정보를 저장함	
+		}
+		
+		String datas[] = new String[len];
+		int w = 0;
+		for (int i = 0; i < humanArr.length; i++) {
+			if(humanArr[i] != null && !humanArr[i].getName().equals(null)) {
+				datas[w] = humanArr[i].alldata();
+				w++;
+			}
+		}
+		dp.saveFile(datas);
+	}
+	
+	public void dataLoad() {
+		String datas[] = dp.loadFile();
+		
+		if(datas != null) {
+			for (int i = 0; i < datas.length; i++) {
+				String data[] = datas[i].split("-"); // 기존 저장된 String 배열에서 "-" 를 제거하여 String data[]에 다시 저장
+				
+				if(data[0].equals("투수")) {
+					humanArr[i] = new PitcherDto(   data[0], // 투수 
+													data[1], // 이름
+													data[2], // 나이
+													data[3], // 키
+													data[4], // 승리
+													data[5], // 패배
+													data[6]); // 승률
+				}
+				else {
+					humanArr[i] = new Batter(  		 data[0], // 투수 
+													data[1], // 이름
+													data[2], // 나이
+													data[3], // 키
+													data[4], // 승리
+													data[5], // 패배
+													data[6]); // 승률
 				}
 			}
-			pw.close();
-			
-			} catch (IOException e) {
-			e.printStackTrace();
-			}
+		}
 	}
 	
 	int serchNum(String m_name) {
